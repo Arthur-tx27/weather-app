@@ -1,5 +1,7 @@
 import { Icon } from '../../shared/ui';
 import { getWeatherInfo } from '../../shared/config/weather-codes';
+import { formatTempValue } from '../../shared/lib';
+import { useUnits } from '../../features/toggle-units';
 import type { HourlyForecast as HourlyForecastType } from '../../entities/weather';
 import { DaySelector } from './DaySelector';
 import styles from './HourlyForecast.module.css';
@@ -20,6 +22,8 @@ function formatDayLabel(dateStr: string): string {
 }
 
 export function HourlyForecast({ hourly }: HourlyForecastProps) {
+  const { units } = useUnits();
+
   const dayGroups = useMemo(() => {
     const groups: Map<string, { date: string; label: string; hours: HourlyForecastType[] }> =
       new Map();
@@ -54,7 +58,7 @@ export function HourlyForecast({ hourly }: HourlyForecastProps) {
             <div key={hour.time} className={styles.hour}>
               <span className={styles.time}>{formatHour(hour.time)}</span>
               <Icon src={info.icon} alt={info.description} size={28} />
-              <span className={styles.temp}>{Math.round(hour.temperature)}°</span>
+              <span className={styles.temp}>{formatTempValue(hour.temperature, units)}°</span>
             </div>
           );
         })}

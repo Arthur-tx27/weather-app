@@ -1,5 +1,7 @@
 import { Icon } from '../../shared/ui';
 import { getWeatherInfo } from '../../shared/config/weather-codes';
+import { formatTempValue } from '../../shared/lib';
+import { useUnits } from '../../features/toggle-units';
 import type { DailyForecast as DailyForecastType } from '../../entities/weather';
 import styles from './DailyForecast.module.css';
 
@@ -13,6 +15,8 @@ function formatDay(dateStr: string): string {
 }
 
 export function DailyForecast({ daily }: DailyForecastProps) {
+  const { units } = useUnits();
+
   if (daily.length === 0) return null;
 
   return (
@@ -26,8 +30,8 @@ export function DailyForecast({ daily }: DailyForecastProps) {
               <span className={styles.dayName}>{formatDay(day.date)}</span>
               <Icon src={info.icon} alt={info.description} size={32} />
               <div className={styles.temps}>
-                <span className={styles.max}>{Math.round(day.tempMax)}°</span>
-                <span className={styles.min}>{Math.round(day.tempMin)}°</span>
+                <span className={styles.max}>{formatTempValue(day.tempMax, units)}°</span>
+                <span className={styles.min}>{formatTempValue(day.tempMin, units)}°</span>
               </div>
             </div>
           );

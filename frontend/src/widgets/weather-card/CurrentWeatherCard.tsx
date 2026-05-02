@@ -1,5 +1,7 @@
 import { Icon } from '../../shared/ui';
 import { getWeatherInfo } from '../../shared/config/weather-codes';
+import { formatTempValue } from '../../shared/lib';
+import { useUnits } from '../../features/toggle-units';
 import type { CurrentWeather } from '../../entities/weather';
 import { AdditionalMetrics } from './AdditionalMetrics';
 import styles from './CurrentWeatherCard.module.css';
@@ -22,6 +24,8 @@ interface CurrentWeatherCardProps {
 }
 
 export function CurrentWeatherCard({ city, current, loading, error }: CurrentWeatherCardProps) {
+  const { units } = useUnits();
+
   if (loading) {
     return (
       <div className={styles.card}>
@@ -51,6 +55,7 @@ export function CurrentWeatherCard({ city, current, loading, error }: CurrentWea
 
   const info = getWeatherInfo(current.weathercode);
   const dateFormatted = formatDate(current.time);
+  const temp = formatTempValue(current.temperature, units);
 
   return (
     <div className={styles.card}>
@@ -62,7 +67,7 @@ export function CurrentWeatherCard({ city, current, loading, error }: CurrentWea
         </div>
         <div className={styles.main}>
           <Icon src={info.icon} alt={info.description} size={72} />
-          <span className={styles.temp}>{Math.round(current.temperature)}°</span>
+          <span className={styles.temp}>{temp}°</span>
         </div>
         <p className={styles.description}>{info.description}</p>
         <AdditionalMetrics
