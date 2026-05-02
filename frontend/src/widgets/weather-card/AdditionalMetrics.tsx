@@ -1,3 +1,5 @@
+import { useUnits } from '../../features/toggle-units';
+import { formatTempValue, formatWind, formatPrecip } from '../../shared/lib';
 import styles from './AdditionalMetrics.module.css';
 
 interface AdditionalMetricsProps {
@@ -7,14 +9,11 @@ interface AdditionalMetricsProps {
   precipitation: number;
 }
 
-function MetricItem({ label, value, unit }: { label: string; value: number; unit: string }) {
+function MetricItem({ label, value }: { label: string; value: string }) {
   return (
     <div className={styles.item}>
       <span className={styles.label}>{label}</span>
-      <span className={styles.value}>
-        {Math.round(value)}
-        {unit}
-      </span>
+      <span className={styles.value}>{value}</span>
     </div>
   );
 }
@@ -25,12 +24,14 @@ export function AdditionalMetrics({
   windSpeed,
   precipitation,
 }: AdditionalMetricsProps) {
+  const { units } = useUnits();
+
   return (
     <div className={styles.grid}>
-      <MetricItem label="Ощущается как" value={feelsLike} unit="°" />
-      <MetricItem label="Влажность" value={humidity} unit="%" />
-      <MetricItem label="Ветер" value={windSpeed} unit=" км/ч" />
-      <MetricItem label="Осадки" value={precipitation} unit=" мм" />
+      <MetricItem label="Ощущается как" value={`${formatTempValue(feelsLike, units)}°`} />
+      <MetricItem label="Влажность" value={`${Math.round(humidity)}%`} />
+      <MetricItem label="Ветер" value={formatWind(windSpeed, units)} />
+      <MetricItem label="Осадки" value={formatPrecip(precipitation, units)} />
     </div>
   );
 }
