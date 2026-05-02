@@ -4,6 +4,18 @@
   background: linear-gradient(135deg, #1a1f52 0%, #2a2f72 100%);
   overflow: hidden;
   min-height: 320px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+  .card {
+    min-height: 360px;
+  }
 }
 
 .bgOverlay {
@@ -16,10 +28,24 @@
   opacity: 0.3;
 }
 
+@media (max-width: 767px) {
+  .bgOverlay {
+    background-image: url('/images/bg-today-small.svg');
+    background-position: right bottom;
+    background-size: 60%;
+  }
+}
+
 .content {
   position: relative;
   z-index: 1;
   padding: 28px 24px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 36px 32px;
+  }
 }
 
 .header {
@@ -32,6 +58,12 @@
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .city {
+    font-size: 2rem;
+  }
 }
 
 .date {
@@ -53,6 +85,12 @@
   font-weight: 700;
   color: var(--color-text);
   line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .temp {
+    font-size: 5rem;
+  }
 }
 
 .description {
