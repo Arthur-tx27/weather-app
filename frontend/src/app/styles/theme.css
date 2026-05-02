@@ -1,0 +1,33 @@
+:root {
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+
+  --color-bg: #0a0e27;
+  --color-surface: #111640;
+  --color-surface-hover: #1a1f52;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-text: #e8e9f0;
+  --color-text-secondary: #8e90a6;
+  --color-text-muted: #5c5e78;
+  --color-accent: #6c63ff;
+  --color-accent-hover: #7f78ff;
+  --color-error: #ff5c5c;
+  --color-success: #4ae0a1;
+
+  --color-weather-sunny: #ffb347;
+  --color-weather-cloudy: #a0b4c8;
+  --color-weather-rain: #6b9bd2;
+  --color-weather-snow: #c8d6e5;
+  --color-weather-storm: #6c5ce7;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
