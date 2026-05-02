@@ -1,0 +1,143 @@
+.card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #1a1f52 0%, #2a2f72 100%);
+  overflow: hidden;
+  min-height: 320px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+@media (min-width: 768px) {
+  .card {
+    min-height: 360px;
+  }
+}
+
+.bgOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/bg-today-large.svg');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  opacity: 0.3;
+}
+
+@media (max-width: 767px) {
+  .bgOverlay {
+    background-image: url('/images/bg-today-small.svg');
+    background-position: right bottom;
+    background-size: 60%;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 28px 24px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 36px 32px;
+  }
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.city {
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+@media (min-width: 768px) {
+  .city {
+    font-size: 2rem;
+  }
+}
+
+.date {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  text-transform: capitalize;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.temp {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .temp {
+    font-size: 5rem;
+  }
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 24px;
+}
+
+.skeleton {
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeletonLine {
+  height: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonTemp {
+  width: 40%;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.5s ease-in-out infinite;
+  margin-top: 8px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.errorBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 12px;
+}
+
+.errorText {
+  font-size: 0.938rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}

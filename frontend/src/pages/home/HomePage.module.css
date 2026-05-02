@@ -1,0 +1,50 @@
+.page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+@media (min-width: 768px) {
+  .page {
+    max-width: 720px;
+    padding: 32px 24px 48px;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.logo {
+  height: 28px;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    height: 32px;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.results {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hint {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.938rem;
+  margin-top: 40px;
+}
