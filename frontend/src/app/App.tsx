@@ -1,7 +1,10 @@
+import { UnitProvider } from '../features/toggle-units';
+import { HomePage } from '../pages/home';
+
 export function App() {
   return (
-    <div>
-      <h1>Weather App</h1>
-    </div>
+    <UnitProvider>
+      <HomePage />
+    </UnitProvider>
   );
 }
