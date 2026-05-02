@@ -1,0 +1,38 @@
+import { Icon } from '../../shared/ui';
+import { getWeatherInfo } from '../../shared/config/weather-codes';
+import type { DailyForecast as DailyForecastType } from '../../entities/weather';
+import styles from './DailyForecast.module.css';
+
+interface DailyForecastProps {
+  daily: DailyForecastType[];
+}
+
+function formatDay(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleDateString('ru-RU', { weekday: 'short' });
+}
+
+export function DailyForecast({ daily }: DailyForecastProps) {
+  if (daily.length === 0) return null;
+
+  return (
+    <div className={styles.section}>
+      <h2 className={styles.title}>Прогноз на 7 дней</h2>
+      <div className={styles.row}>
+        {daily.map((day) => {
+          const info = getWeatherInfo(day.weathercode);
+          return (
+            <div key={day.date} className={styles.day}>
+              <span className={styles.dayName}>{formatDay(day.date)}</span>
+              <Icon src={info.icon} alt={info.description} size={32} />
+              <div className={styles.temps}>
+                <span className={styles.max}>{Math.round(day.tempMax)}°</span>
+                <span className={styles.min}>{Math.round(day.tempMin)}°</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
