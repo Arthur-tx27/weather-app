@@ -10,16 +10,16 @@ export function DaySelector({ days, selectedIndex, onSelect }: DaySelectorProps)
   if (days.length <= 1) return null;
 
   return (
-    <div className={styles.selector}>
+    <select
+      className={styles.select}
+      value={selectedIndex}
+      onChange={(e) => onSelect(Number(e.target.value))}
+    >
       {days.map((day, i) => (
-        <button
-          key={day.date}
-          className={`${styles.day} ${i === selectedIndex ? styles.active : ''}`}
-          onClick={() => onSelect(i)}
-        >
+        <option key={day.date} value={i}>
           {day.label}
-        </button>
+        </option>
       ))}
-    </div>
+    </select>
   );
 }

@@ -39,18 +39,21 @@ export function HomePage() {
 
         {city && (
           <div className={styles.results}>
-            <CurrentWeatherCard
-              city={city.name}
-              current={forecast?.current ?? null}
-              loading={loading}
-              error={error}
-            />
+            <div className={styles.leftColumn}>
+              <CurrentWeatherCard
+                city={city.name}
+                current={forecast?.current ?? null}
+                loading={loading}
+                error={error}
+              />
+
+              {hasData && <DailyForecast daily={forecast.daily} />}
+            </div>
 
             {hasData && (
-              <>
-                <DailyForecast daily={forecast!.daily} />
+              <div className={styles.rightColumn}>
                 <HourlyForecast hourly={forecast!.hourly} />
-              </>
+              </div>
             )}
           </div>
         )}

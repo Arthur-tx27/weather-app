@@ -1,12 +1,12 @@
 .page {
-  max-width: 480px;
-  margin: 0 auto;
+  width: 100vw;
   padding: 24px 16px 40px;
 }
 
 @media (min-width: 768px) {
   .page {
-    max-width: 720px;
+    margin: 0 auto;
+    max-width: 1000px;
     padding: 32px 24px 48px;
   }
 }
@@ -29,6 +29,7 @@
 }
 
 .main {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,6 +41,32 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .results {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 24px;
+    align-items: start;
+  }
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .leftColumn {
+    gap: 24px;
+  }
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
 }
 
 .hint {
