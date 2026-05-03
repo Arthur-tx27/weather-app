@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import { useSelectedDay } from '../../entities/weather';
 import styles from './DaySelector.module.css';
 
 interface DaySelectorProps {
   days: Array<{ date: string; label: string }>;
-  selectedIndex: number;
-  onSelect: (index: number) => void;
 }
 
-export function DaySelector({ days, selectedIndex, onSelect }: DaySelectorProps) {
+export function DaySelector({ days }: DaySelectorProps) {
+  const { selectedDay, selectDay } = useSelectedDay();
   const [isOpen, setIsOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -30,7 +30,7 @@ export function DaySelector({ days, selectedIndex, onSelect }: DaySelectorProps)
         onClick={() => setIsOpen((v) => !v)}
         type="button"
       >
-        <span>{days[selectedIndex]?.label}</span>
+        <span>{days[selectedDay]?.label}</span>
         <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -40,9 +40,9 @@ export function DaySelector({ days, selectedIndex, onSelect }: DaySelectorProps)
           {days.map((day, i) => (
             <button
               key={day.date}
-              className={`${styles.option} ${i === selectedIndex ? styles.optionActive : ''}`}
+              className={`${styles.option} ${i === selectedDay ? styles.optionActive : ''}`}
               onClick={() => {
-                onSelect(i);
+                selectDay(i);
                 setIsOpen(false);
               }}
               type="button"

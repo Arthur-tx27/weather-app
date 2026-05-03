@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { SearchCity } from '../../features/search-city';
 import { UnitDropdown } from '../../features/toggle-units';
 import { CurrentWeatherCard } from '../../widgets/weather-card';
 import { DailyForecast } from '../../widgets/forecast-chart';
 import { HourlyForecast } from '../../widgets/forecast-chart';
-import { useWeatherForecast } from '../../entities/weather';
+import { useWeatherForecast, useSelectedDay } from '../../entities/weather';
 import type { City } from '../../entities/city';
+import type { CurrentWeather } from '../../entities/weather';
 import styles from './HomePage.module.css';
 
 export function HomePage() {
   const [city, setCity] = useState<City | null>(null);
+  const { selectedDay, selectDay } = useSelectedDay();
 
   const {
     forecast,
@@ -20,6 +22,28 @@ export function HomePage() {
     city?.latitude ?? null,
     city?.longitude ?? null,
   );
+
+  useEffect(() => {
+    selectDay(0);
+  }, [forecast, selectDay]);
+
+  const currentWeatherData = useMemo<CurrentWeather | null>(() => {
+    if (!forecast) return null;
+    if (selectedDay === 0) return forecast.current;
+    const date = forecast.daily[selectedDay]?.date;
+    if (!date) return null;
+    const hourly = forecast.hourly.find((h) => h.time.startsWith(date));
+    if (!hourly) return forecast.current;
+    return {
+      temperature: hourly.temperature,
+      feelsLike: hourly.feelsLike,
+      humidity: hourly.humidity,
+      precipitation: hourly.precipitation,
+      windspeed: hourly.windSpeed,
+      weathercode: hourly.weathercode,
+      time: hourly.time,
+    };
+  }, [forecast, selectedDay]);
 
   const handleCitySelect = (selected: City) => {
     setCity(selected);
@@ -42,7 +66,7 @@ export function HomePage() {
             <div className={styles.leftColumn}>
               <CurrentWeatherCard
                 city={city.name}
-                current={forecast?.current ?? null}
+                current={currentWeatherData}
                 loading={loading}
                 error={error}
               />

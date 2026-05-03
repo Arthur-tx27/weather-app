@@ -2,10 +2,11 @@ import { Icon } from '../../shared/ui';
 import { getWeatherInfo } from '../../shared/config/weather-codes';
 import { formatTempValue } from '../../shared/lib';
 import { useUnits } from '../../features/toggle-units';
+import { useSelectedDay } from '../../entities/weather';
 import type { HourlyForecast as HourlyForecastType } from '../../entities/weather';
 import { DaySelector } from './DaySelector';
 import styles from './HourlyForecast.module.css';
-import { useMemo, useRef, useState, useEffect } from 'react';
+import { useMemo, useRef, useEffect } from 'react';
 
 interface HourlyForecastProps {
   hourly: HourlyForecastType[];
@@ -23,6 +24,7 @@ function formatDayLabel(dateStr: string): string {
 
 export function HourlyForecast({ hourly }: HourlyForecastProps) {
   const { units } = useUnits();
+  const { selectedDay } = useSelectedDay();
 
   const dayGroups = useMemo(() => {
     const groups: Map<string, { date: string; label: string; hours: HourlyForecastType[] }> =
@@ -37,7 +39,6 @@ export function HourlyForecast({ hourly }: HourlyForecastProps) {
     return Array.from(groups.values());
   }, [hourly]);
 
-  const [selectedDay, setSelectedDay] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,11 +53,7 @@ export function HourlyForecast({ hourly }: HourlyForecastProps) {
     <div className={styles.container}>
       <div className={styles.header}>
         <h2 className={styles.title}>Почасовой прогноз</h2>
-        <DaySelector
-          days={dayGroups.map((g) => ({ date: g.date, label: g.label }))}
-          selectedIndex={selectedDay}
-          onSelect={setSelectedDay}
-        />
+        <DaySelector days={dayGroups.map((g) => ({ date: g.date, label: g.label }))} />
       </div>
       <div className={styles.scroll} ref={scrollRef}>
         {currentGroup.map((hour) => {
