@@ -46,12 +46,9 @@
   background: var(--color-surface);
   border-radius: var(--radius-md);
   cursor: default;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.hour:hover {
-  background: var(--color-surface-hover);
-  transform: translateY(-2px);
+  transition:
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
 }
 
 @media (min-width: 768px) {

@@ -7,11 +7,6 @@
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
-
 @media (min-width: 768px) {
   .card {
     min-height: 360px;
@@ -24,7 +19,7 @@
   background-image: url('/images/bg-today-large.svg');
   background-repeat: no-repeat;
   background-position: right center;
-  background-size: contain;
+  background-size: cover;
   opacity: 0.3;
 }
 
@@ -32,7 +27,7 @@
   .bgOverlay {
     background-image: url('/images/bg-today-small.svg');
     background-position: right bottom;
-    background-size: 60%;
+    background-size: cover;
   }
 }
 
