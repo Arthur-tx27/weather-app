@@ -20,7 +20,7 @@ export function DailyForecast({ daily }: DailyForecastProps) {
   if (daily.length === 0) return null;
 
   return (
-    <div className={styles.section}>
+    <div className={styles.container}>
       <h2 className={styles.title}>Прогноз на 7 дней</h2>
       <div className={styles.row}>
         {daily.map((day) => {

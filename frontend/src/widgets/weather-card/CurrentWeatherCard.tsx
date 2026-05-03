@@ -59,8 +59,6 @@ export function CurrentWeatherCard({ city, current, loading, error }: CurrentWea
 
   return (
     <div className={styles.card}>
-      <div className={styles.bgOverlay} />
-      <div className={styles.content}>
         <div className={styles.header}>
           <h1 className={styles.city}>{city}</h1>
           <p className={styles.date}>{dateFormatted}</p>
@@ -76,7 +74,6 @@ export function CurrentWeatherCard({ city, current, loading, error }: CurrentWea
           windSpeed={current.windspeed}
           precipitation={current.precipitation}
         />
-      </div>
     </div>
   );
 }

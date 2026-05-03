@@ -1,47 +1,22 @@
 .card {
-  position: relative;
   border-radius: var(--radius-lg);
   background: linear-gradient(135deg, #1a1f52 0%, #2a2f72 100%);
   overflow: hidden;
   min-height: 320px;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  padding: 12px;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 @media (min-width: 768px) {
   .card {
-    min-height: 360px;
+    /* min-height: 360px; */
+    padding: 16px
   }
 }
 
-.bgOverlay {
-  position: absolute;
-  inset: 0;
-  background-image: url('/images/bg-today-large.svg');
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: cover;
-  opacity: 0.3;
-}
 
-@media (max-width: 767px) {
-  .bgOverlay {
-    background-image: url('/images/bg-today-small.svg');
-    background-position: right bottom;
-    background-size: cover;
-  }
-}
-
-.content {
-  position: relative;
-  z-index: 1;
-  padding: 28px 24px;
-}
-
-@media (min-width: 768px) {
-  .content {
-    padding: 36px 32px;
-  }
-}
 
 .header {
   margin-bottom: 20px;
@@ -118,8 +93,13 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 0.8; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
 }
 
 .errorBlock {
