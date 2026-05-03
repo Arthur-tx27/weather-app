@@ -12,8 +12,12 @@ function formatDate(dateStr: string): string {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
-    year: 'numeric',
   });
+}
+
+function formatTime(timeStr: string): string {
+  const date = new Date(timeStr);
+  return date.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 }
 
 interface CurrentWeatherCardProps {
@@ -59,11 +63,9 @@ export function CurrentWeatherCard({ city, current, loading, error }: CurrentWea
 
   return (
     <div className={styles.card}>
-      <div className={styles.bgOverlay} />
-      <div className={styles.content}>
         <div className={styles.header}>
           <h1 className={styles.city}>{city}</h1>
-          <p className={styles.date}>{dateFormatted}</p>
+          <p className={styles.date}>{dateFormatted}, {formatTime(current.time)}</p>
         </div>
         <div className={styles.main}>
           <Icon src={info.icon} alt={info.description} size={72} />
@@ -76,7 +78,6 @@ export function CurrentWeatherCard({ city, current, loading, error }: CurrentWea
           windSpeed={current.windspeed}
           precipitation={current.precipitation}
         />
-      </div>
     </div>
   );
 }

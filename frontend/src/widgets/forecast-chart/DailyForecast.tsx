@@ -2,6 +2,7 @@ import { Icon } from '../../shared/ui';
 import { getWeatherInfo } from '../../shared/config/weather-codes';
 import { formatTempValue } from '../../shared/lib';
 import { useUnits } from '../../features/toggle-units';
+import { useSelectedDay } from '../../entities/weather';
 import type { DailyForecast as DailyForecastType } from '../../entities/weather';
 import styles from './DailyForecast.module.css';
 
@@ -16,17 +17,22 @@ function formatDay(dateStr: string): string {
 
 export function DailyForecast({ daily }: DailyForecastProps) {
   const { units } = useUnits();
+  const { selectedDay, selectDay } = useSelectedDay();
 
   if (daily.length === 0) return null;
 
   return (
-    <div className={styles.section}>
+    <div className={styles.container}>
       <h2 className={styles.title}>Прогноз на 7 дней</h2>
       <div className={styles.row}>
-        {daily.map((day) => {
+        {daily.map((day, i) => {
           const info = getWeatherInfo(day.weathercode);
           return (
-            <div key={day.date} className={styles.day}>
+            <div
+              key={day.date}
+              className={`${styles.day} ${i === selectedDay ? styles.active : ''}`}
+              onClick={() => selectDay(i)}
+            >
               <span className={styles.dayName}>{formatDay(day.date)}</span>
               <Icon src={info.icon} alt={info.description} size={32} />
               <div className={styles.temps}>
