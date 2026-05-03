@@ -8,7 +8,7 @@ export interface UnitConfig {
 
 export const UNITS: Record<UnitSystem, UnitConfig> = {
   metric: {
-    temp: { unit: '°C', convert: (c) => c },
+    temp: { unit: '°C', convert: (c) => Math.round(c) },
     wind: { unit: 'км/ч', convert: (w) => w },
     precip: { unit: 'мм', convert: (p) => p },
   },

@@ -22,19 +22,16 @@
   transition: background-color var(--transition-fast);
 }
 
-.item:hover {
-  background: rgba(255, 255, 255, 0.04);
-}
-
 .label {
   font-size: 0.75rem;
+  font-weight: 500;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .value {
   font-size: 1.125rem;
-  font-weight: 500;
   color: var(--color-text);
 }

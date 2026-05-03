@@ -36,6 +36,15 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   min-height: 100vh;
   background-color: var(--color-bg);
