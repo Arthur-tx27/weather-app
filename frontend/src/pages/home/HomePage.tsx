@@ -32,7 +32,8 @@ export function HomePage() {
     if (selectedDay === 0) return forecast.current;
     const date = forecast.daily[selectedDay]?.date;
     if (!date) return null;
-    const hourly = forecast.hourly.find((h) => h.time.startsWith(date));
+    let hourly = forecast.hourly.find((h) => h.time.startsWith(date) && h.time.includes('T12:'));
+    if (!hourly) hourly = forecast.hourly.find((h) => h.time.startsWith(date));
     if (!hourly) return forecast.current;
     return {
       temperature: hourly.temperature,
